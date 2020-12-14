@@ -24,7 +24,7 @@ describe('justifyText function', () => {
     res.send = jest.fn((resText) => {
       justifiedText = resText;
       return;
-    })
+    });
 
     justifyText(req, res, null);
 

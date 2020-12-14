@@ -1,14 +1,29 @@
 
+import isRequestAuthorised from '../token/isRequestAuthorised';
+
 const LINES_LEN = 80;
 
 const justifyText = (req, res, next) => {
   const string = req.body;
+  let token = (req.headers.authorization || '').split(' ')[1];
 
-  if (!string) {
-    res.status(400);
+  const isAuthorised = isRequestAuthorised(token, string);
+
+  // If words count overflow
+  if (!isAuthorised) {
+    res.status(402);
+    res.end();
     return;
   }
 
+  // If no string is provided, return 400
+  if (!string) {
+    res.status(400);
+    res.end();
+    return;
+  }
+
+  // If string is small, send back easy
   if (string.length < LINES_LEN) {
     let justifiedString = string;
 
