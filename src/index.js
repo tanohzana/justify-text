@@ -9,6 +9,8 @@ const PORT = process.env.PORT || 8080;
 
 const app = express();
 
+app.use(express.text());
+
 const run = () => {
   app.post('/api/justify', justifyText);
 
