@@ -1,15 +1,23 @@
 
-import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import isRequestAuthorised from './isRequestAuthorised';
 
 dotenv.config();
-
-const JWT_SECRET = process.env.JWT_SECRET;
 
 const verifyToken = (req, res, next) => {
   try {
     let token = (req.headers.authorization || '').split(' ')[1];
-    jwt.verify(token, JWT_SECRET);
+    const string = req.body;
+
+    const isAuthorised = isRequestAuthorised(token, string);
+
+    // If words count overflow
+    if (!isAuthorised) {
+      res.status(402);
+      res.end();
+      return;
+    }
+
     next();
   } catch(e) {
     console.log(e);

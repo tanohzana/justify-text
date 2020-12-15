@@ -7,6 +7,7 @@ describe('justifyText function', () => {
   const res = {
     status: jest.fn(),
     send: jest.fn(),
+    end: jest.fn(),
   };
 
   it('should return status 201 when a string is provided', () => {
@@ -17,7 +18,7 @@ describe('justifyText function', () => {
     expect(res.status).toHaveBeenCalledWith(201);
   });
 
-  it('should return a function with 80 chars per line', () => {
+  it('should return a multi-lines string with 80 chars per line', () => {
     let justifiedText = null;
     req.body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer suscipit viverra lorem, eu molestie urna suscipit at. Phasellus in ornare metus, venenatis finibus erat. In vulputate semper dignissim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nulla ligula est, molestie a urna at, facilisis sollicitudin est. Quisque malesuada euismod vehicula. Proin viverra eleifend rhoncus. Duis quis consequat est, et tristique elit.';
 
@@ -29,7 +30,6 @@ describe('justifyText function', () => {
     justifyText(req, res, null);
 
     justifiedText.split('\n').forEach(part => {
-      console.log(part);
       expect(part.length).toBeLessThanOrEqual(LINES_LEN);
     });
   });
