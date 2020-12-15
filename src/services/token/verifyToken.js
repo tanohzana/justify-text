@@ -7,6 +7,11 @@ dotenv.config();
 const verifyToken = (req, res, next) => {
   try {
     let token = (req.headers.authorization || '').split(' ')[1];
+
+    if (!token) {
+      throw new Error('No token provided');
+    }
+
     const string = req.body;
 
     const isAuthorised = isRequestAuthorised(token, string);
