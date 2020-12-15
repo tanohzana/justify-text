@@ -7,6 +7,14 @@ A NPM package to justify text.
 
 It requires a token that limits the number of words to 400 per day.
 
+## Test the app online
+
+The app is running here :
+
+https://justify-text-app.herokuapp.com/
+
+⚠️ It uses a free dyno on Heroku, so you need to allow it a few seconds to turn the dyno on after your first request.
+
 ## To run the project
 
 To run the project, create a `.env` file with the field `JWT_SECRET` and add a random string to it.
