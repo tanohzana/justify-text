@@ -54,3 +54,7 @@ Returns :
 Find the project test coverage here :
 
 https://codecov.io/gh/tanohzana/justify-text/
+
+## Disclaimer ❗️
+
+In a more evolved CI, I would not have put babel in the dependencies. I would have built the app in a container then taken the dist folder through a volume, and just put it in a much lighter container to run. Here, I had to, since I did not want to add the `dist` folder to Github...
